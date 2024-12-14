@@ -1,0 +1,389 @@
+[
+  {
+    "$type": "StringType",
+    "sensitive": true,
+    "minLength": null,
+    "maxLength": null,
+    "pattern": null
+  },
+  {
+    "$type": "StringType",
+    "sensitive": null,
+    "minLength": null,
+    "maxLength": null,
+    "pattern": null
+  },
+  {
+    "$type": "ArrayType",
+    "itemType": {
+      "$ref": "#/1"
+    },
+    "minLength": null,
+    "maxLength": null
+  },
+  {
+    "$type": "BooleanType"
+  },
+  {
+    "$type": "IntegerType",
+    "minValue": null,
+    "maxValue": null
+  },
+  {
+    "$type": "ObjectType",
+    "name": "body",
+    "properties": {
+      "name": {
+        "type": {
+          "$ref": "#/1"
+        },
+        "flags": 17,
+        "description": "The name of the secret in KeyVault."
+      },
+      "value": {
+        "type": {
+          "$ref": "#/1"
+        },
+        "flags": 4,
+        "description": "The value of the secret in KeyVault."
+      }
+    },
+    "additionalProperties": null,
+    "sensitive": null
+  },
+  {
+    "$type": "ResourceType",
+    "name": "Secret",
+    "scopeType": 0,
+    "readOnlyScopes": null,
+    "body": {
+      "$ref": "#/5"
+    },
+    "flags": 0,
+    "functions": null
+  },
+  {
+    "$type": "ObjectType",
+    "name": "key",
+    "properties": {
+      "exportable": {
+        "type": {
+          "$ref": "#/3"
+        },
+        "flags": 0,
+        "description": null
+      },
+      "keyType": {
+        "type": {
+          "$ref": "#/1"
+        },
+        "flags": 0,
+        "description": null
+      },
+      "keySize": {
+        "type": {
+          "$ref": "#/4"
+        },
+        "flags": 0,
+        "description": null
+      },
+      "reuseKey": {
+        "type": {
+          "$ref": "#/3"
+        },
+        "flags": 0,
+        "description": null
+      },
+      "curve": {
+        "type": {
+          "$ref": "#/1"
+        },
+        "flags": 0,
+        "description": null
+      }
+    },
+    "additionalProperties": null,
+    "sensitive": null
+  },
+  {
+    "$type": "ObjectType",
+    "name": "secret",
+    "properties": {
+      "contentType": {
+        "type": {
+          "$ref": "#/1"
+        },
+        "flags": 0,
+        "description": null
+      }
+    },
+    "additionalProperties": null,
+    "sensitive": null
+  },
+  {
+    "$type": "ObjectType",
+    "name": "subjectAlternativeNames",
+    "properties": {
+      "emails": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": null
+      },
+      "dnsNames": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": null
+      },
+      "upns": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": null
+      }
+    },
+    "additionalProperties": null,
+    "sensitive": null
+  },
+  {
+    "$type": "ObjectType",
+    "name": "x509Properties",
+    "properties": {
+      "subject": {
+        "type": {
+          "$ref": "#/1"
+        },
+        "flags": 0,
+        "description": null
+      },
+      "ekus": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": null
+      },
+      "subjectAlternativeNames": {
+        "type": {
+          "$ref": "#/9"
+        },
+        "flags": 0,
+        "description": null
+      },
+      "keyUsage": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": null
+      },
+      "validityInMonths": {
+        "type": {
+          "$ref": "#/4"
+        },
+        "flags": 0,
+        "description": null
+      }
+    },
+    "additionalProperties": null,
+    "sensitive": null
+  },
+  {
+    "$type": "ObjectType",
+    "name": "trigger",
+    "properties": {
+      "lifetimePercentage": {
+        "type": {
+          "$ref": "#/4"
+        },
+        "flags": 0,
+        "description": null
+      },
+      "daysBeforeExpiry": {
+        "type": {
+          "$ref": "#/4"
+        },
+        "flags": 0,
+        "description": null
+      }
+    },
+    "additionalProperties": null,
+    "sensitive": null
+  },
+  {
+    "$type": "ObjectType",
+    "name": "action",
+    "properties": {
+      "actionType": {
+        "type": {
+          "$ref": "#/1"
+        },
+        "flags": 0,
+        "description": null
+      }
+    },
+    "additionalProperties": null,
+    "sensitive": null
+  },
+  {
+    "$type": "ObjectType",
+    "name": "lifetimeAction",
+    "properties": {
+      "trigger": {
+        "type": {
+          "$ref": "#/11"
+        },
+        "flags": 0,
+        "description": null
+      },
+      "action": {
+        "type": {
+          "$ref": "#/12"
+        },
+        "flags": 0,
+        "description": null
+      }
+    },
+    "additionalProperties": null,
+    "sensitive": null
+  },
+  {
+    "$type": "ArrayType",
+    "itemType": {
+      "$ref": "#/13"
+    },
+    "minLength": null,
+    "maxLength": null
+  },
+  {
+    "$type": "ObjectType",
+    "name": "issuer",
+    "properties": {
+      "name": {
+        "type": {
+          "$ref": "#/1"
+        },
+        "flags": 0,
+        "description": null
+      },
+      "certificateType": {
+        "type": {
+          "$ref": "#/1"
+        },
+        "flags": 0,
+        "description": null
+      },
+      "certificateTransparency": {
+        "type": {
+          "$ref": "#/3"
+        },
+        "flags": 0,
+        "description": null
+      }
+    },
+    "additionalProperties": null,
+    "sensitive": null
+  },
+  {
+    "$type": "ObjectType",
+    "name": "attributes",
+    "properties": {
+      "enabled": {
+        "type": {
+          "$ref": "#/3"
+        },
+        "flags": 0,
+        "description": null
+      }
+    },
+    "additionalProperties": null,
+    "sensitive": null
+  },
+  {
+    "$type": "ObjectType",
+    "name": "body",
+    "properties": {
+      "name": {
+        "type": {
+          "$ref": "#/1"
+        },
+        "flags": 17,
+        "description": "The name of the certificate in KeyVault."
+      },
+      "key": {
+        "type": {
+          "$ref": "#/7"
+        },
+        "flags": 0,
+        "description": null
+      },
+      "secret": {
+        "type": {
+          "$ref": "#/8"
+        },
+        "flags": 0,
+        "description": null
+      },
+      "x509Properties": {
+        "type": {
+          "$ref": "#/10"
+        },
+        "flags": 0,
+        "description": null
+      },
+      "lifetimeActions": {
+        "type": {
+          "$ref": "#/14"
+        },
+        "flags": 0,
+        "description": null
+      },
+      "issuer": {
+        "type": {
+          "$ref": "#/15"
+        },
+        "flags": 0,
+        "description": null
+      },
+      "attributes": {
+        "type": {
+          "$ref": "#/16"
+        },
+        "flags": 0,
+        "description": null
+      }
+    },
+    "additionalProperties": null,
+    "sensitive": null
+  },
+  {
+    "$type": "ResourceType",
+    "name": "Certificate",
+    "scopeType": 0,
+    "readOnlyScopes": null,
+    "body": {
+      "$ref": "#/17"
+    },
+    "flags": 0,
+    "functions": null
+  },
+  {
+    "$type": "ObjectType",
+    "name": "configuration",
+    "properties": {
+      "vaultUri": {
+        "type": {
+          "$ref": "#/1"
+        },
+        "flags": 1,
+        "description": "The KeyVault URI."
+      }
+    },
+    "additionalProperties": null,
+    "sensitive": null
+  }
+]
