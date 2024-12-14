@@ -1,0 +1,20 @@
+{
+  "resources": {
+    "Secret": {
+      "$ref": "types.json#/6"
+    },
+    "Certificate": {
+      "$ref": "types.json#/18"
+    }
+  },
+  "resourceFunctions": {},
+  "settings": {
+    "name": "KeyVault",
+    "version": "0.0.1",
+    "isSingleton": false,
+    "configurationType": {
+      "$ref": "types.json#/19"
+    }
+  },
+  "fallbackResourceType": null
+}
