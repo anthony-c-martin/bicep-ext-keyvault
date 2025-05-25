@@ -1,3 +1,5 @@
+targetScope = 'local'
+
 param vaultUri string
 
 @secure()
