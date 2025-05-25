@@ -10,7 +10,7 @@
     "currentProfile": "AzureCloud"
   },
   "extensions": {
-    "keyvault": "br:bicepextdemo.azurecr.io/extensions/keyvault:0.1.1"
+    "keyvault": "br:bicepextdemo.azurecr.io/extensions/keyvault:0.1.5"
   },
   "implicitExtensions": []
 }
