@@ -18,9 +18,8 @@
 ## Build + Test Locally
 
 ### Rebuild the extension
-These commands rebuild the types, publish the extension to the local file system, and updates the sample bicepconfig to point to the local extension.
+These commands publish the extension to the local file system, and updates the sample bicepconfig to point to the local extension.
 ```sh
-./scripts/generate_types.sh
 ./scripts/publish.sh ./bin/bicep-ext-keyvault
 jq '.extensions.keyvault="../bin/bicep-ext-keyvault"' ./samples/bicepconfig.json > ./samples/bicepconfig.new.json
 mv ./samples/bicepconfig.new.json ./samples/bicepconfig.json
