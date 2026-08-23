@@ -10,6 +10,8 @@ namespace Bicep.Extension.KeyVault.Tests;
 /// </summary>
 public static class HandlerHarness
 {
+    public const string TestVaultUri = "https://test-vault.vault.azure.net/";
+
     // The Bicep host exchanges properties/config as camelCase JSON.
     private static readonly JsonSerializerOptions SerializerOptions = new(JsonSerializerDefaults.Web);
 
@@ -17,13 +19,14 @@ public static class HandlerHarness
         IResourceHandler handler,
         string type,
         object properties,
-        string vaultUri = "https://test-vault.vault.azure.net/",
+        string? vaultUri = TestVaultUri,
+        object? configuration = null,
         CancellationToken cancellationToken = default)
     {
         var spec = new ResourceSpecification
         {
             Type = type,
-            Config = JsonSerializer.Serialize(new { vaultUri }, SerializerOptions),
+            Config = JsonSerializer.Serialize(configuration ?? new { vaultUri }, SerializerOptions),
             Properties = JsonSerializer.Serialize(properties, SerializerOptions),
         };
 
@@ -35,5 +38,21 @@ public static class HandlerHarness
         Assert.IsNull(response.ErrorData);
         Assert.IsNotNull(response.Resource);
         return JsonSerializer.Deserialize<JsonElement>(response.Resource.Properties);
+    }
+
+    public static JsonElement ResourceIdentifiers(this LocalExtensibilityOperationResponse response)
+    {
+        Assert.IsNull(response.ErrorData);
+        Assert.IsNotNull(response.Resource);
+        return JsonSerializer.Deserialize<JsonElement>(response.Resource.Identifiers);
+    }
+
+    /// <summary>
+    /// Asserts the operation failed, and returns the reported error code.
+    /// </summary>
+    public static string ErrorCode(this LocalExtensibilityOperationResponse response)
+    {
+        Assert.IsNotNull(response.ErrorData, "Expected the operation to fail.");
+        return response.ErrorData.Error.Code;
     }
 }

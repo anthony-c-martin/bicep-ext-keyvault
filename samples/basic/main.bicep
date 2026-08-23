@@ -12,6 +12,33 @@ extension keyvault with {
 resource secret 'Secret' = {
   name: 'mysecret'
   value: secretVal
+  contentType: 'text/plain'
+  tags: {
+    environment: 'demo'
+  }
+}
+
+resource key 'Key' = {
+  name: 'mykey'
+  keyType: 'RSA'
+  keySize: 2048
+  keyOps: ['sign', 'verify', 'wrapKey', 'unwrapKey']
+  rotationPolicy: {
+    expireAfter: 'P90D'
+    notifyBeforeExpiry: 'P29D'
+    automatic: {
+      timeBeforeExpiry: 'P30D'
+    }
+  }
+}
+
+resource contacts 'CertificateContacts' = {
+  contacts: [
+    {
+      email: 'admin@contoso.com'
+      name: 'Certificate Admin'
+    }
+  ]
 }
 
 resource cert 'Certificate' = {
@@ -55,3 +82,12 @@ resource cert 'Certificate' = {
     validityInMonths: 12
   }
 }
+
+@description('Use the version-less id to always resolve the current version of the secret.')
+output secretUri string = secret.versionlessId
+
+@description('The public half of the generated key, ready to drop into an authorized_keys file.')
+output keyPublicKeyOpenSsh string = key.publicKeyOpenSsh
+
+output certificateThumbprint string = cert.thumbprint
+output certificateExpires string = cert.certificateAttributes.expires

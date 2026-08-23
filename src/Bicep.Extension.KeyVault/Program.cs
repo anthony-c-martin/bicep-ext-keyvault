@@ -24,6 +24,13 @@ builder.Services
     .WithTypeAssembly(typeof(Program).Assembly)
     .WithConfigurationType(typeof(Configuration))
     .WithResourceHandler<CertificateHandler>()
+    .WithResourceHandler<CertificateContactsHandler>()
+    .WithResourceHandler<CertificateIssuerHandler>()
+    .WithResourceHandler<KeyHandler>()
+    .WithResourceHandler<ManagedHsmKeyHandler>()
+    .WithResourceHandler<ManagedHsmKeyRotationPolicyHandler>()
+    .WithResourceHandler<ManagedHsmRoleAssignmentHandler>()
+    .WithResourceHandler<ManagedHsmRoleDefinitionHandler>()
     .WithResourceHandler<SecretHandler>();
 
 var app = builder.Build();
