@@ -7,15 +7,19 @@
 1. Launch the [Deploy Pane](https://github.com/Azure/bicep/blob/main/docs/experimental/deploy-ui.md) to run the deployment.
 
 > [!NOTE]
-> Extension binary packages are not signed on a Mac. If you see the following error, you will need to manually sign the extension package:
-> 
-> `Failed to launch provider: Failed to connect to provider /Users/ant/.bicep/br/bicepextdemo.azurecr.io/extensions$keyvault/0.1.1$/extension.bin`
-> 
-> To work around it, run the following in a terminal window, using the path from the error message:
-> 
-> `codesign -s - '/Users/ant/.bicep/br/bicepextdemo.azurecr.io/extensions$keyvault/0.1.1$/extension.bin'`
+> Extension binary packages are not signed on a Mac. If you see a "Failed to launch provider" error, you
+> will need to manually sign the extension package, using the path from the error message, e.g.:
+>
+> `codesign -s - '/Users/ant/.bicep/br/ghcr.io.anthony-c-martin.bicep-ext-keyvault/0.1.1$/extension.bin'`
 
 ## Build + Test Locally
+
+### Build and test
+
+```sh
+dotnet build
+dotnet test
+```
 
 ### Rebuild the extension
 These commands publish the extension to the local file system, and updates the sample bicepconfig to point to the local extension.
@@ -28,7 +32,7 @@ mv ./samples/bicepconfig.new.json ./samples/bicepconfig.json
 ### Test the extension
 Run the deployment.
 ```sh
-~/.azure/bin/bicep local-deploy ./samples/basic/main.bicepparam
+bicep local-deploy ./samples/basic/main.bicepparam
 ```
 
 To enable verbose tracing, run the following beforehand.
@@ -36,17 +40,31 @@ To enable verbose tracing, run the following beforehand.
 export BICEP_TRACING_ENABLED=true
 ```
 
-## Publishing to a registry
-This repo is set up with GitHub Actions to publish a new version to an ACR on every push to the `main` branch.
+## Releasing
 
-To pick up a new version after publishing, view the [Publish Extension output](https://github.com/anthony-c-martin/bicep-ext-keyvault/actions/workflows/publish.yml), and update your bicepconfig.json to use the new spec:
+Releases are cut manually so that versioning stays under explicit control — pushing to `main` does
+not publish anything. To release, run the **Release** workflow from the Actions tab (or with
+`gh workflow run release.yml -f version=0.2.0`) and supply the exact version to publish.
 
-![publish extension output](./docs/publish_extension_output.png)
+The workflow validates the version, builds and tests, publishes
+`br:ghcr.io/anthony-c-martin/bicep-ext-keyvault:<version>` and then pushes a `v`-prefixed git tag
+(`v0.2.0`) and GitHub Release. Note that the OCI artifact is tagged with the bare version, while the
+git tag carries the `v` prefix. The workflow refuses to run if the tag already exists, so published
+versions are never replaced; releases must be cut from `main`.
+
+The version supplied to the workflow is stamped into the binary via `-p:Version=`, and is what the
+extension reports to Bicep. Local builds use the placeholder `0.0.1-dev` version from
+[`Bicep.Extension.KeyVault.csproj`](./src/Bicep.Extension.KeyVault/Bicep.Extension.KeyVault.csproj).
 
 ### First time setup
-To configure the GitHub Actions automation for the first time:
+To configure this repository's GitHub branch protection and collaborators, login with the `gh` CLI and run:
 
-Log in to Azure CLI. Customize and run `./scripts/initial_setup.sh`.
+```powershell
+./scripts/setup.ps1
+```
+
+The script obtains a token from `GITHUB_TOKEN` or `gh auth token` and deploys
+[`scripts/repo/main.bicepparam`](./scripts/repo/main.bicepparam).
 
 ## Building other extensions
 

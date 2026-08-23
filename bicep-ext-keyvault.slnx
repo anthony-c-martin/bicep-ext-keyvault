@@ -1,0 +1,4 @@
+﻿<Solution>
+  <Project Path="src/Bicep.Extension.KeyVault.Tests/Bicep.Extension.KeyVault.Tests.csproj" />
+  <Project Path="src/Bicep.Extension.KeyVault/Bicep.Extension.KeyVault.csproj" />
+</Solution>

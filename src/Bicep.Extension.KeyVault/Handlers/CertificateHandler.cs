@@ -20,6 +20,9 @@ public class CertificateHandler : TypedResourceHandler<Certificate, CertificateI
     private static void CopyToCollection<T>(IEnumerable<T>? input, ICollection<T> output)
         => CopyToCollection(input, output, x => x);
 
+    protected override Task<ResourceResponse> Preview(ResourceRequest request, CancellationToken cancellationToken)
+        => Task.FromResult(GetResponse(request));
+
     protected override async Task<ResourceResponse> CreateOrUpdate(ResourceRequest request, CancellationToken cancellationToken)
     {
         static Azure.Security.KeyVault.Certificates.SubjectAlternativeNames GetSans(SubjectAlternativeNames input)

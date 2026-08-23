@@ -4,7 +4,7 @@
     "ociEnabled": true
   },
   "extensions": {
-    "keyvault": "br:ghcr.io/anthony-c-martin/bicep-ext-keyvault:0.0.1"
+    "github": "br:ghcr.io/anthony-c-martin/bicep-ext-github:0.0.1"
   },
   "implicitExtensions": []
 }
