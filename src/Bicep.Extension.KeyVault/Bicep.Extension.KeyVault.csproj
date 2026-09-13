@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.Bicep.Local.Extension" Version="0.46.1" />
+    <PackageReference Include="Azure.Bicep.Local.Extension" Version="0.47.16" />
     <PackageReference Include="Azure.Identity" Version="1.21.0" />
     <PackageReference Include="Azure.Security.KeyVault.Administration" Version="4.8.1" />
     <PackageReference Include="Azure.Security.KeyVault.Certificates" Version="4.9.1" />
